@@ -1,9 +1,20 @@
 # DentaCare — site estático
 
 Site da clínica odontológica, exportado a partir do projeto Framer
-(`dentacaredental.framer.website`) para código estático **self-contained**:
-HTML pré-renderizado + todos os assets (imagens, fontes, vídeos e JS) hospedados
-localmente. Não depende mais do Framer para funcionar.
+(`dentacaredental.framer.website`) para HTML estático.
+
+**O que é local:** HTML pré-renderizado, imagens, fontes e vídeos — tudo
+hospedado neste repositório.
+
+**O que vem do Framer (CDN):** apenas o runtime JavaScript (`framerusercontent.com`),
+responsável pela hidratação, animações de entrada e interações (menu mobile, FAQ).
+Tentar hospedar esse JS localmente quebra a hidratação do React (o runtime do
+Framer usa `new URL()` com caminhos absolutos), então ele é mantido no CDN.
+
+> ⚠️ Consequência: o JS continua dependendo do projeto seguir **publicado no
+> Framer** (mesmo no plano grátis). Se o projeto for despublicado, as animações
+> e interações param — o conteúdo (texto e imagens) continua aparecendo, pois é
+> tudo SSR local. Para independência 100%, veja "Independência total" abaixo.
 
 ## Estrutura
 
@@ -40,6 +51,14 @@ Depois abra http://localhost:8000
 
 Para usar o domínio próprio (ex.: `dentalbrooklin.com.br`), adicione um arquivo
 `CNAME` com o domínio e configure o DNS conforme a documentação do GitHub Pages.
+
+## Independência total (opcional)
+
+Hoje o JS depende do Framer. Para zerar essa dependência, as opções são:
+1. Manter o projeto publicado no Framer (grátis funciona) — solução atual.
+2. Plano pago do Framer com exportação de código.
+3. Recriar a página em código limpo (HTML/CSS/JS próprio) usando este export
+   como referência visual.
 
 ## Observações
 
